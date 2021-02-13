@@ -24,6 +24,14 @@ export class TabsPage implements OnInit {
       }
     });
   }
+
+  register(){
+    this.navCtrl.navigateRoot('/register');
+  }
+
+  login(){
+    this.navCtrl.navigateRoot('/login');
+  }
   ngOnInit() {
   }
 }
