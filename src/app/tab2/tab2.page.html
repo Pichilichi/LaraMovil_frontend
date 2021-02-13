@@ -1,9 +1,7 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-title>
+    <h1>Ofertas (una botonera x aqui para filtrar estaria de lujo)</h1>
+  </ion-title>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -13,5 +11,20 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Oferta</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <!-- <p>{{ data ? data : '-' }}</p> -->
+      <p>Hace falta un icono por clase(de las fotos pasadas de raul por la plataforma)</p>
+      <p>Titular</p>
+      <p>Boton ver que muestre todos los datos</p>
+      <p>Boton aplciar que permita insertar, eliminar, y aumentar</p>
+    </ion-card-content>
+  </ion-card>
+</ion-list>
 </ion-content>
