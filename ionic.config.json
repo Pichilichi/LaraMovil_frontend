@@ -1,5 +1,7 @@
 {
   "name": "LaraMovil_frontend",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
