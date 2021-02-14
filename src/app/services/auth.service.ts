@@ -57,6 +57,23 @@ export class AuthService {
       });
   }
 
+  activate(tok:any,data: any){
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl + '/activate',
+      {
+      user_id: data,
+      },{
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
+        })
+      .subscribe(data => {
+      this.token = data;
+      resolve(data);
+      }, err => {
+      console.log(err);
+      });
+    });
+  }
+
   getUsers(tok: any) {
     return new Promise(resolve => {
     this.http.get(this.apiUrl + '/users', {

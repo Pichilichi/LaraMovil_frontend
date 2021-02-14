@@ -14,6 +14,7 @@ export class LoginPage implements OnInit {
   data = {};
   token: any;
   users:any;
+  tok: any;
 
   constructor(
     private modalController: ModalController,
@@ -36,9 +37,12 @@ export class LoginPage implements OnInit {
     return await registerModal.present();
   }
 
+
   login(){
+    console.log(this.data);
     this.authService.login(this.data).then(data => {
       this.token = data;
+      console.log(this.token);
       this.authService.getUsers(this.token).then(data => {
         this.users = data;
         if(this.token.data.type == 'client'){
@@ -54,7 +58,7 @@ export class LoginPage implements OnInit {
             });
         }
         else{
-          this.navCtrl.navigateRoot('/tabs/tab3');
+          this.navCtrl.navigateRoot('/tabs-admin/Usuarios');
         }
         
       });

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, MenuController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginPage } from '../pages/auth/login/login.page';
-import { RegisterPage } from '../pages/auth/register/register.page';
+
 
 @Component({
   selector: 'app-tabs',
@@ -35,19 +34,6 @@ export class TabsPage implements OnInit {
     this.navCtrl.navigateRoot('/login');
   }
 
-  async loginModal() {
-    const loginModal = await this.modalController.create({
-      component: LoginPage,
-    });
-    return await loginModal.present();
-  }
-  async registerModal() {
-    const registerModal = await this.modalController.create({
-      component: RegisterPage,
-    });
-    return await registerModal.present();
-  }
-  
   ngOnInit() {
   }
 }
