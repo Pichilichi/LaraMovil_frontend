@@ -31,6 +31,11 @@ const routes: Routes = [
     path: 'tabs-admin',
     loadChildren: () => import('./tabs-admin/tabs-admin.module').then( m => m.TabsAdminPageModule)
   },
+  {
+    path: 'article/:id',
+    loadChildren: () => import('./pages/article/article.module').then( m => m.ArticlePageModule)
+  },
+
 ];
 @NgModule({
   imports: [

@@ -19,6 +19,7 @@
       <ion-card-content>
         <p>{{article.description}}</p>
         <img src="assets/cicleImages/{{article.image}}" />
+        <ion-button (click)="verNoticia(article.id)">Ver noticia</ion-button>
       </ion-card-content>
     </ion-card>
   </ion-list>

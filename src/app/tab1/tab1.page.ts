@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { getTestBed } from '@angular/core/testing';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -16,9 +17,10 @@ export class Tab1Page {
   changer = 1;
   
   constructor(private http: HttpClient,
-    private authService: AuthService,) {
+    private authService: AuthService,
+    private navCtrl: NavController,) {
     this.data = '';
-    // this.cicle_id = this.authService.token.data.cicle_id
+    this.cicle_id = this.authService.token.data.cicle_id
     this.authService.getArticles().then(data => {
       this.articles = data;
       this.data = this.filtrar(this.articles)
@@ -66,6 +68,10 @@ export class Tab1Page {
         this.data = this.filtrar(this.articles)
       });
     }
+  }
+
+  verNoticia(id: number){
+    this.navCtrl.navigateRoot('/article/'+id);
   }
 
 }
