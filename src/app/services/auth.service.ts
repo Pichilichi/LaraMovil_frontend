@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { EnvService } from './env.service';
 import { User } from '../models/user';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
     private http: HttpClient,
     private storage: NativeStorage,
     private env: EnvService,
+    private navCtrl: NavController,
   ) { }
 
   login(data: any) {
@@ -27,6 +29,7 @@ export class AuthService {
     .subscribe(data => {
     this.token = data;
     resolve(data);
+    // this.navCtrl.navigateRoot('/tabs');
     }, err => {
     console.log(err);
     });
@@ -53,6 +56,19 @@ export class AuthService {
       });
       });
   }
+
+  getUsers(tok: any) {
+    return new Promise(resolve => {
+    this.http.get(this.apiUrl + '/users', {
+    headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
+    })
+    .subscribe(data => {
+    resolve(data);
+    }, err => {
+    console.log(err);
+    });
+    });
+   }
 
   // logout() {
   //   const headers = new HttpHeaders({
