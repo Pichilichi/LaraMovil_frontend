@@ -20,7 +20,6 @@ export class RegisterPage implements OnInit {
   // Dismiss Register Modal
   dismissRegister() {
     this.modalController.dismiss();
-    this.navCtrl.navigateRoot('/tabs');
   }
 
   // On Login button tap, dismiss Register modal and open login Modal
@@ -43,7 +42,6 @@ export class RegisterPage implements OnInit {
           },
           () => {
             this.dismissRegister();
-            this.navCtrl.navigateRoot('/dashboard');
           }
         );
         this.alertService.presentToast(data['message']);

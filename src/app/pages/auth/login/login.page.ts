@@ -22,7 +22,6 @@ export class LoginPage implements OnInit {
   // Dismiss Login Modal
   dismissLogin() {
     this.modalController.dismiss();
-    this.navCtrl.navigateRoot('/tabs');
   }
   // On Register button tap, dismiss login modal and open register modal
   async registerModal() {
