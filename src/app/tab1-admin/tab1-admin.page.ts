@@ -11,13 +11,12 @@ export class Tab1AdminPage implements OnInit {
 
   data = {};
   token: any;
-  d: any;
   users = {};
 
   constructor(private http: HttpClient,private authService: AuthService,) { 
     this.authService.getUsers(this.authService.token).then(data => {
       this.users = data;
-    })
+    });
   }
 
 
