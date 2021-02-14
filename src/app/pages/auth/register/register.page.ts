@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     private alertService: AlertService
   ) { }
+  
   ngOnInit() {
   }
 
@@ -30,31 +31,38 @@ export class RegisterPage implements OnInit {
       });
     console.log(this.token);
   }
-  // // Dismiss Register Modal
-  // dismissRegister() {
-  //   this.modalController.dismiss();
-  //   this.navCtrl.navigateRoot('/tabs');
-  // }
 
-  register(form: NgForm) {
-    this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
-      data => {
-        this.authService.login(form.value.email, form.value.password).subscribe(
-          data => {
-          },
-          error => {
-            console.log(error);
-          },
-          () => {
-            this.dismissRegister();
-          }
-        );
-        this.alertService.presentToast(data['message']);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
+  // // Dismiss Register Modal
+  dismissRegister() {
+    this.modalController.dismiss();
+  }
+
+  async loginModal() {
+    const loginModal = await this.modalController.create({
+      component: LoginPage,
+    });
+    return await loginModal.present();
+  }
+
+  // register(form: NgForm) {
+  //   this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
+  //     data => {
+  //       this.authService.login(form.value.email, form.value.password).subscribe(
+  //         data => {
+  //         },
+  //         error => {
+  //           console.log(error);
+  //         },
+  //         () => {
+  //           this.dismissRegister();
+  //         }
+  //       );
+  //       this.alertService.presentToast(data['message']);
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     },
+  //     () => {
         
   //     }
   //   );
