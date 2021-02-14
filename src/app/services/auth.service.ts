@@ -9,37 +9,49 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class AuthService {
-  isLoggedIn = false;
-  token:any;
+  apiUrl = 'https://allsites.es/sales_in_api/public/api';
+  token: any;
   constructor(
     private http: HttpClient,
     private storage: NativeStorage,
     private env: EnvService,
   ) { }
 
-  login(email: String, password: String) {
-    return this.http.post(this.env.API_URL + '/login',
-      {email: email, password: password}
-    ).pipe(
-      tap(token => {
-        this.storage.setItem('token', token)
-        .then(
-          () => {
-            console.log('Token Stored');
-          },
-          error => console.error('Error storing item', error)
-        );
-        this.token = token;
-        this.isLoggedIn = true;
-        return token;
-      }),
-    );
+  login(data: any) {
+    return new Promise(resolve => {
+    this.http.post(this.apiUrl + '/login',
+    {
+    email: data.email,
+    password: data.pass
+    })
+    .subscribe(data => {
+    this.token = data;
+    resolve(data);
+    }, err => {
+    console.log(err);
+    });
+    });
+   
   }
 
-  register(fName: String, lName: String, email: String, password: String) {
-    return this.http.post(this.env.API_URL + '/register',
-      {fName: fName, lName: lName, email: email, password: password}
-    )
+  register(data: any) {
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl + '/register',
+      {
+      name: data.name,
+      surname: data.surname,
+      email: data.email,
+      password: data.password,
+      c_password: data.c_pass,
+      cicle_id: data.cicle,
+      })
+      .subscribe(data => {
+      this.token = data;
+      resolve(data);
+      }, err => {
+      console.log(err);
+      });
+      });
   }
 
   // logout() {
@@ -57,32 +69,32 @@ export class AuthService {
   //   )
   // }
 
-  user() {
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
-    .pipe(
-      tap(user => {
-        return user;
-      })
-    )
-  }
+  // user() {
+  //   const headers = new HttpHeaders({
+  //     'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+  //   });
+  //   return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
+  //   .pipe(
+  //     tap(user => {
+  //       return user;
+  //     })
+  //   )
+  // }
   
-  getToken() {
-    return this.storage.getItem('token').then(
-      data => {
-        this.token = data;
-        if(this.token != null) {
-          this.isLoggedIn=true;
-        } else {
-          this.isLoggedIn=false;
-        }
-      },
-      error => {
-        this.token = null;
-        this.isLoggedIn=false;
-      }
-    );
-  }
+  // getToken() {
+  //   return this.storage.getItem('token').then(
+  //     data => {
+  //       this.token = data;
+  //       if(this.token != null) {
+  //         this.isLoggedIn=true;
+  //       } else {
+  //         this.isLoggedIn=false;
+  //       }
+  //     },
+  //     error => {
+  //       this.token = null;
+  //       this.isLoggedIn=false;
+  //     }
+  //   );
+  // }
 }

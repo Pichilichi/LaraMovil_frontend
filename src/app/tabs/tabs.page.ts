@@ -17,13 +17,13 @@ export class TabsPage implements OnInit {
   ) { 
     this.menu.enable(false);
   }
-  ionViewWillEnter() {
-    this.authService.getToken().then(() => {
-      if(this.authService.isLoggedIn) {
-        this.navCtrl.navigateRoot('/dashboard');
-      }
-    });
-  }
+  // ionViewWillEnter() {
+  //   this.authService.getToken().then(() => {
+  //     if(this.authService.isLoggedIn) {
+  //       this.navCtrl.navigateRoot('/dashboard');
+  //     }
+  //   });
+  // }
 
   register(){
     this.navCtrl.navigateRoot('/register');
