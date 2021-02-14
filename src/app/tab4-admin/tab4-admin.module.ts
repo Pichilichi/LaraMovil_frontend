@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { Tab4AdminPageRoutingModule } from './tab4-admin-routing.module';
 
 import { Tab4AdminPage } from './tab4-admin.page';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab4AdminPageRoutingModule
+    Tab4AdminPageRoutingModule,
+    ChartsModule
   ],
   declarations: [Tab4AdminPage]
 })

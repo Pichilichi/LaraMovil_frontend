@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,9 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(), 
-    AppRoutingModule,],
+    AppRoutingModule,
+    ChartsModule,
+  ],
   providers: [{ 
     provide: RouteReuseStrategy, 
     useClass: IonicRouteStrategy, },
