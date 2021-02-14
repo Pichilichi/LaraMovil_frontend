@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
   ) { }
   ngOnInit() {
   }
+  
   // Dismiss Login Modal
   dismissLogin() {
     this.modalController.dismiss();

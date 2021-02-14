@@ -87,6 +87,17 @@ export class AuthService {
     });
    }
 
+   getArticles(){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/articles')
+      .subscribe(data => {
+      resolve(data);
+      }, err => {
+      console.log(err);
+      });
+      });
+   }
+
   // logout() {
   //   const headers = new HttpHeaders({
   //     'Authorization': this.token["token_type"]+" "+this.token["access_token"]

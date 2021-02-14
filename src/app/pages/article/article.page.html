@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1">Volver</ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let article of data">
+      <ion-card-header>
+        <ion-card-subtitle>Ciclo: {{article.cicle_name}}</ion-card-subtitle>
+        <ion-card-title>{{article.title}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <p>{{article.description}}</p>
+        <img src="assets/cicleImages/{{article.image}}" />
+      </ion-card-content>
+    </ion-card>
+</ion-content>

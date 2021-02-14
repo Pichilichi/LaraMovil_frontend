@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
+import { getTestBed } from '@angular/core/testing';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -8,12 +11,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Tab1Page {
 
-  data: string;
-
-  constructor(private http: HttpClient) {
+  data: any;
+  articles = {};
+  cicle_id: string;
+  changer = 1;
+  
+  constructor(private http: HttpClient,
+    private authService: AuthService,
+    private navCtrl: NavController,) {
     this.data = '';
+    this.cicle_id = this.authService.token.data.cicle_id
+    this.authService.getArticles().then(data => {
+      this.articles = data;
+      this.data = this.filtrar(this.articles)
+      // this.data = this.getSorted(this.data)
+    });
+    
   }
-
+  // filtroPorCiclo(elemento){
+  //   return elemento.cicle_id = this.cicle_id
+  // }
   loadData(event) {
     setTimeout(() => {
       console.log('Done');
@@ -25,6 +42,36 @@ export class Tab1Page {
         event.target.disabled = true;
       }
     }, 500);
+  }
+  show(){
+    console.log(this.authService.token)
+  }
+
+  getSorted(toSort: any){
+    return toSort.data.sort((a,b)=>a.created_at.localeCompare(b.created_at));
+  }
+  filtrar(toSort: any){
+    return toSort.data.filter((element) => element.cicle_id == "3").sort((a,b)=>a.created_at.localeCompare(b.created_at));
+  }
+
+  getTodos(){
+    this.changer += 1;
+    if(this.changer%2 == 0){
+      this.authService.getArticles().then(data => {
+      this.articles = data;
+      this.data = this.getSorted(this.articles)
+    });
+    }
+    else{
+      this.authService.getArticles().then(data => {
+        this.articles = data;
+        this.data = this.filtrar(this.articles)
+      });
+    }
+  }
+
+  verNoticia(id: number){
+    this.navCtrl.navigateRoot('/article/'+id);
   }
 
 }
