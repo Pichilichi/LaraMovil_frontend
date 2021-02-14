@@ -9,6 +9,14 @@ export class Tab2AdminPage implements OnInit {
 
   constructor() { }
 
+  OfertasPDF(){
+    
+  }
+
+  PartPDF(){
+    
+  }
+
   ngOnInit() {
   }
 

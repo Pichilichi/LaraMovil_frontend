@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -20,7 +21,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
   providers: [{ 
     provide: RouteReuseStrategy, 
     useClass: IonicRouteStrategy, },
-    NativeStorage
+    NativeStorage,
   ],
   bootstrap: [AppComponent],
 })

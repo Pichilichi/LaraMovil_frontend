@@ -40,10 +40,10 @@ export class LoginPage implements OnInit {
 
 
   login(){
-    console.log(this.data);
+    // console.log(this.data);
     this.authService.login(this.data).then(data => {
       this.token = data;
-      console.log(this.token);
+      // console.log(this.token);
       this.authService.getUsers(this.token).then(data => {
         this.users = data;
         if(this.token.data.type == 'client'){

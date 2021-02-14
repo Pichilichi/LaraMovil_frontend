@@ -18,25 +18,17 @@ export class TabsAdminPage implements OnInit {
   ngOnInit() {
   }
 
-  register(){
-    this.navCtrl.navigateRoot('/register');
-  }
+  // register(){
+  //   this.navCtrl.navigateRoot('/register');
+  // }
 
-  login(){
+  // login(){
+  //   this.navCtrl.navigateRoot('/login');
+  // }
+
+  logout(){
     this.navCtrl.navigateRoot('/login');
   }
 
-  async loginModal() {
-    const loginModal = await this.modalController.create({
-      component: LoginPage,
-    });
-    return await loginModal.present();
-  }
-  async registerModal() {
-    const registerModal = await this.modalController.create({
-      component: RegisterPage,
-    });
-    return await registerModal.present();
-  }
 
 }

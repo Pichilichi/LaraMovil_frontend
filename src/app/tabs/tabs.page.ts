@@ -26,11 +26,15 @@ export class TabsPage implements OnInit {
   //   });
   // }
 
-  register(){
-    this.navCtrl.navigateRoot('/register');
-  }
+  // register(){
+  //   this.navCtrl.navigateRoot('/register');
+  // }
 
-  login(){
+  // login(){
+  //   this.navCtrl.navigateRoot('/login');
+  // }
+
+  logout(){
     this.navCtrl.navigateRoot('/login');
   }
 
