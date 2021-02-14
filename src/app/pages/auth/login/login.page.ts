@@ -11,6 +11,9 @@ import { AlertService } from 'src/app/services/alert.service';
 })
 export class LoginPage implements OnInit {
   
+  data = {};
+  token: any;
+
   constructor(
     private modalController: ModalController,
     private authService: AuthService,
@@ -32,18 +35,25 @@ export class LoginPage implements OnInit {
     return await registerModal.present();
   }
 
-  login(form: NgForm) {
-    this.authService.login(form.value.email, form.value.password).subscribe(
-      data => {
-        this.alertService.presentToast("Logged In");
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        this.dismissLogin();
-        this.navCtrl.navigateRoot('/tabs');
-      }
-    );
+  login(){
+    this.authService.login(this.data).then(data => {
+      this.token = data;
+      this.navCtrl.navigateRoot('/tabs');
+      });
   }
+
+  // login(form: NgForm) {
+  //   this.authService.login(form.value.email, form.value.password).subscribe(
+  //     data => {
+  //       this.alertService.presentToast("Logged In");
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     },
+  //     () => {
+  //       this.dismissLogin();
+  //       this.navCtrl.navigateRoot('/tabs');
+  //     }
+  //   );
+  // }
 }
