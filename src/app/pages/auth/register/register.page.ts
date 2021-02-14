@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     private alertService: AlertService
   ) { }
+  
   ngOnInit() {
   }
 
@@ -30,20 +31,18 @@ export class RegisterPage implements OnInit {
       });
     console.log(this.token);
   }
-  // // Dismiss Register Modal
-  // dismissRegister() {
-  //   this.modalController.dismiss();
-  //   this.navCtrl.navigateRoot('/tabs');
-  // }
 
-  // // On Login button tap, dismiss Register modal and open login Modal
-  // async loginModal() {
-  //   this.dismissRegister();
-  //   const loginModal = await this.modalController.create({
-  //     component: LoginPage,
-  //   });
-  //   return await loginModal.present();
-  // }
+  // // Dismiss Register Modal
+  dismissRegister() {
+    this.modalController.dismiss();
+  }
+
+  async loginModal() {
+    const loginModal = await this.modalController.create({
+      component: LoginPage,
+    });
+    return await loginModal.present();
+  }
 
   // register(form: NgForm) {
   //   this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
@@ -56,7 +55,6 @@ export class RegisterPage implements OnInit {
   //         },
   //         () => {
   //           this.dismissRegister();
-  //           this.navCtrl.navigateRoot('/dashboard');
   //         }
   //       );
   //       this.alertService.presentToast(data['message']);
