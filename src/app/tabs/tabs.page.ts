@@ -30,9 +30,9 @@ export class TabsPage implements OnInit {
   //   this.navCtrl.navigateRoot('/register');
   // }
 
-  // login(){
-  //   this.navCtrl.navigateRoot('/login');
-  // }
+  login(){
+    this.navCtrl.navigateRoot('/login');
+  }
 
   logout(){
     this.navCtrl.navigateRoot('/login');
