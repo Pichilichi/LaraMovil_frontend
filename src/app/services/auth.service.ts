@@ -98,6 +98,30 @@ export class AuthService {
       });
    }
 
+   getOffers(tok: any){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/offers', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
+      })
+      .subscribe(data => {
+      resolve(data);
+      }, err => {
+      console.log(err);
+      });
+      });
+   }
+
+   getCicles(){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/cicles')
+      .subscribe(data => {
+      resolve(data);
+      }, err => {
+      console.log(err);
+      });
+      });
+   }
+
   // logout() {
   //   const headers = new HttpHeaders({
   //     'Authorization': this.token["token_type"]+" "+this.token["access_token"]

@@ -1,30 +1,41 @@
-<ion-header class="ion-no-border" [translucent]="true">
-  <ion-title>
-    <h1>Ofertas (una botonera x aqui para filtrar estaria de lujo)</h1>
-  </ion-title>
+<ion-header class="ion-no-border" >
+  <ion-toolbar class="header">
+  <ion-item>
+    <ion-label>Filtrar ofertas</ion-label>
+    <ion-select (ionChange)="change()" [(ngModel)]="id" placeholder="Select One">
+      <ion-select-option value="0">Todos</ion-select-option>
+      <ion-select-option value="1">ASIR</ion-select-option>
+      <ion-select-option value="2">Automocion</ion-select-option>
+      <ion-select-option value="3">Comercio</ion-select-option>
+      <ion-select-option value="4">DAM</ion-select-option>
+      <ion-select-option value="5">Electricidad</ion-select-option>
+      <ion-select-option value="6">Frio</ion-select-option>
+      <ion-select-option value="7">Gestion</ion-select-option>
+      <ion-select-option value="8">Mecatronica</ion-select-option>
+      <ion-select-option value="9">Soldadura</ion-select-option>
+      <ion-select-option value="10">Teleco</ion-select-option>
+    </ion-select>
+  </ion-item>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-<ion-list>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Oferta</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <!-- <p>{{ data ? data : '-' }}</p> -->
-      <p>Hace falta un icono por clase(de las fotos pasadas de raul por la plataforma)</p>
-      <p>Titular</p>
-      <p>Boton ver que muestre todos los datos</p>
-      <p>Boton aplciar que permita insertar, eliminar, y aumentar</p>
-    </ion-card-content>
-  </ion-card>
-</ion-list>
+<ion-content [fullscreen]="true">
+  <ion-list >
+    <ion-card *ngFor="let article of data">
+      <ion-card-header>
+        <ion-card-subtitle>Ciclo: {{article.cicle_name}}</ion-card-subtitle>
+        <ion-card-title>{{article.headline}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <img src="assets/cicleImages/{{article.cicle_name | lowercase}}.png" />
+        <ion-button (click)="verOferta(article.id)">Ver noticia</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
