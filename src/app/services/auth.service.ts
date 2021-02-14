@@ -74,6 +74,37 @@ export class AuthService {
     });
   }
 
+  aplicar(tok:any,data: any){
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl + '/applied',
+      {
+      user_id: data[0],
+      offer_id: data[1], 
+      },{
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
+        })
+      .subscribe(data => {
+      this.token = data;
+      resolve(data);
+      }, err => {
+      console.log(err);
+      });
+    });
+  }
+
+  getOffersApplied(tok: any, user_id) {
+    return new Promise(resolve => {
+    this.http.get(this.apiUrl + '/offersApplied/' + user_id, {
+    headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
+    })
+    .subscribe(data => {
+    resolve(data);
+    }, err => {
+    console.log(err);
+    });
+    });
+   }
+
   getUsers(tok: any) {
     return new Promise(resolve => {
     this.http.get(this.apiUrl + '/users', {

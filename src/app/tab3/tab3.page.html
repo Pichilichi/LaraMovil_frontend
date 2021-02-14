@@ -1,29 +1,28 @@
-<ion-header class="ion-no-border" [translucent]="true">
-  <ion-title>
-    <h1>Apliques</h1>
-  </ion-title>
+<ion-header class="ion-no-border" >
+  <ion-toolbar class="header">
+  <ion-item>
+    <ion-label>Mis apliques</ion-label>
+  </ion-item>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-<ion-list>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Mis aplicados</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <!-- <p>{{ data ? data : '-' }}</p> -->
-      <p>Hace falta un icono por clase(de las fotos pasadas de raul por la plataforma)</p>
-      <p>Titular</p>
-      <p>Boton ver que muestre todos los datos</p>
-    </ion-card-content>
-  </ion-card>
-</ion-list>
+<ion-content [fullscreen]="true">
+  <ion-list >
+    <ion-card *ngFor="let article of data.data">
+      <ion-card-header>
+        <ion-card-subtitle>Ciclo: {{article.cicle_name}}</ion-card-subtitle>
+        <ion-card-title>{{article.headline}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <img src="assets/cicleImages/{{article.cicle_name | lowercase}}.png" />
+        <ion-button (click)="verOferta(article.id)">Ver</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab2Page {
 
+  toSend = [];
   data: any;
   articles = {};
   cicles = {};
@@ -64,5 +65,13 @@ export class Tab2Page {
 
   verOferta(id: number){
     this.navCtrl.navigateRoot('/offer/'+id);
+  }
+
+  aplicar(id){
+    this.toSend = [this.authService.token.data.id, id]
+    this.authService.aplicar(this.authService.token, this.toSend).then(data => {
+      console.log(data);
+    });
+    this.toSend = [];
   }
 }

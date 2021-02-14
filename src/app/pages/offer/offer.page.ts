@@ -18,7 +18,7 @@ export class OfferPage implements OnInit {
     private authService: AuthService,
     private navCtrl: NavController,) {
       this.id = parseInt(this.route.snapshot.paramMap.get('id'));
-      this.authService.getArticles().then(data => {
+      this.authService.getOffers(this.authService.token).then(data => {
         this.articles = data;
         this.data = this.filtrar(this.articles)
       })
