@@ -1,0 +1,34 @@
+<ion-tabs>
+  <ion-header  [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        SalesIN
+      </ion-title>
+        <ion-button  slot="end" expand="block" fill="outline" color="danger" (click)="register()">Register</ion-button>
+        <ion-button  slot="secondary" expand="block" fill="outline" color="primary" (click)="login()">Sign In</ion-button>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="megaphone-outline"></ion-icon>
+      <ion-label>Noticias</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2">
+      <ion-icon name="reader-outline"></ion-icon>
+      <ion-label>Ofertas</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="file-tray-full-outline"></ion-icon>
+      <ion-label>Mis Apliques</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab4">
+      <ion-icon name="file-tray-full-outline"></ion-icon>
+      <ion-label>Mis Apliques</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

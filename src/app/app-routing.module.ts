@@ -26,7 +26,11 @@ const routes: Routes = [
   { 
     path: 'list', 
     loadChildren: './list/list.module#ListPageModule', canActivate: [AuthGuard] 
-},
+  },
+  {
+    path: 'tabs-admin',
+    loadChildren: () => import('./tabs-admin/tabs-admin.module').then( m => m.TabsAdminPageModule)
+  },
 ];
 @NgModule({
   imports: [
