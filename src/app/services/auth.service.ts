@@ -84,7 +84,26 @@ export class AuthService {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
         })
       .subscribe(data => {
-      this.token = data;
+      console.log(data)
+      resolve(data);
+      }, err => {
+      console.log(err);
+      });
+    });
+  }
+
+  desaplicar(tok:any,data: any){
+    this.token = tok;
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl + '/unapplied',
+      {
+      user_id: data[0],
+      offer_id: data[1], 
+      },{
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
+        })
+      .subscribe(data => {
+        console.log(data)
       resolve(data);
       }, err => {
       console.log(err);
@@ -93,6 +112,7 @@ export class AuthService {
   }
 
   getOffersApplied(tok: any, user_id) {
+    this.token = tok;
     return new Promise(resolve => {
     this.http.get(this.apiUrl + '/offersApplied/' + user_id, {
     headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
@@ -105,7 +125,22 @@ export class AuthService {
     });
    }
 
+   getOffersNotApplied(tok: any, user_id) {
+    this.token = tok;
+    return new Promise(resolve => {
+    this.http.get(this.apiUrl + '/offersNotApplied/' + user_id, {
+    headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
+    })
+    .subscribe(data => {
+    resolve(data);
+    }, err => {
+    console.log(err);
+    });
+    });
+   }
+
   getUsers(tok: any) {
+    this.token = tok;
     return new Promise(resolve => {
     this.http.get(this.apiUrl + '/users', {
     headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
@@ -130,6 +165,7 @@ export class AuthService {
    }
 
    getOffers(tok: any){
+    this.token = tok;
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/offers', {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
@@ -143,6 +179,7 @@ export class AuthService {
    }
 
    deleteOffers(tok: any, offer_id: any){
+    this.token = tok;
     return new Promise(resolve => {
       this.http.delete(this.apiUrl + '/offers/' + offer_id,{
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),

@@ -21,7 +21,7 @@ export class Tab3Page {
     private navCtrl: NavController,) {
       this.data = '';
     // this.cicle_id = this.authService.token.data.cicle_id
-    this.authService.getOffers(this.authService.token).then(data => {
+    this.authService.getOffersApplied(this.authService.token, this.authService.token.data.id).then(data => {
       this.articles = data;
       this.data = this.articles
     });
@@ -42,5 +42,30 @@ export class Tab3Page {
         event.target.disabled = true;
       }
     }, 500);
+  }
+
+  desaplicar(id){
+    this.toSend = [this.authService.token.data.id, id]
+    this.authService.desaplicar(this.authService.token, this.toSend).then(data => {
+      console.log(data);
+    });
+    this.toSend = [];
+    this.authService.getOffersApplied(this.authService.token, this.authService.token.data.id).then(data => {
+      this.articles = data;
+      this.data = this.articles
+    });
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.authService.getOffersApplied(this.authService.token, this.authService.token.data.id).then(data => {
+      this.articles = data;
+      this.data = this.articles
+    });
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 }
