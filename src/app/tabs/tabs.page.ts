@@ -39,5 +39,8 @@ export class TabsPage implements OnInit {
   }
 
   ngOnInit() {
+    if(this.authService.token == null){
+      this.navCtrl.navigateRoot('/login');
+    }
   }
 }
