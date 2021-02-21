@@ -1,25 +1,23 @@
-<ion-header>
+<ion-header class="ion-padding-bottom">
   <ion-toolbar>
     <!-- <ion-button color="light" slot="end" (click)="dismissLogin()">Close</ion-button> -->
-    <ion-title>Login</ion-title>
+    <ion-title class="ion-text-center ">Login</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <form #form="ngForm" (ngSubmit)="login()" method="post">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
+  <form #form="ngForm" (ngSubmit)="login()" method="post" class="ion-padding-bottom">
+    <ion-item class="ion-padding-bottom">
+      <ion-label position="floating" class="ion-text-center ">Email</ion-label>
       <ion-input [(ngModel)]="data.email" type="email" name="email"></ion-input>
     </ion-item>
   
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
+    <ion-item class="ion-padding-bottom">
+      <ion-label position="floating" class="ion-text-center ">Password</ion-label>
       <ion-input [(ngModel)]="data.pass" type="password" name="password"></ion-input>
     </ion-item>
-  
-    <p text-right>Forgot Password?</p>
-  
-    <ion-button type="submit" expand="full" color="primary">Login</ion-button>
+    
+    <ion-button size="default" type="submit" expand="block" color="primary" class="ion-padding">Login</ion-button>
   </form>
-  <p text-center>Don't have a account?</p>
-  <ion-button expand="full" color="danger" (click)="registerModal()">Register</ion-button>
+  <p class="ion-text-center ion-padding-top" strong="true">Don't have an account?</p>
+  <ion-button size="default" class="ion-padding" expand="block" color="danger" (click)="registerModal()">Register</ion-button>
 </ion-content>
