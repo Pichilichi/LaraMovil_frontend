@@ -72,6 +72,13 @@ export class Tab4AdminPage implements OnInit {
     ];
   }
 
+  crearGrafico(){
+    this.barChartLabels = this.ids
+    this.barChartData = [
+      { data: this.offersByCicle, label: 'Ofertas por ciclos'}
+    ];
+    }
+
   setCicles(data){
     this.cicles = data.data
   }
@@ -129,7 +136,6 @@ export class Tab4AdminPage implements OnInit {
         console.log(this.offersByCicle);
         this.crearGrafico(this.cicles);
       });
-
     // -->meter datos en grafica offersByCicle//ciclesSelect= -->cicles=> ids
 // https://amoelcodigo.com/graficas-angular-ng2charts/
   }
