@@ -118,7 +118,7 @@ export class Tab4AdminPage implements OnInit {
   }
 
   filtrar(toSort: any, id){
-    return toSort.data.filter((element) => element.cicle_id == id)
+    return toSort.data.filter((element) => element.cicle_id == id)}
   filtrarIds(){
     for(let i = 0; i < this.ids.length; i++) {
       var num = this.offers.filter(offer => offer.cicle_id == this.ids[i]).length;
@@ -130,9 +130,6 @@ export class Tab4AdminPage implements OnInit {
   // filtrar(toSort: any, id){
   //   return toSort.data.filter((element) => element.cicle_id == id)
   // }
-  filtrarDate(toSort: any){
-    return toSort.data.filter((element) =>element.date_max >= "2020-08-12T00:00:00.000000Z");
-  }
   filtrarDate(toSort: any){
     return toSort.data.filter((element) =>element.date_max >= "2020-08-12T00:00:00.000000Z");
   }
