@@ -36,7 +36,8 @@ export class Tab4AdminPage implements OnInit {
       // });
       this.authService.getCicles().then(data => {
         this.data = data;
-        this.setCicles(this.data)
+        // this.setCicles(this.data)
+        this.cicles = this.data.data
       })
     
   }
@@ -47,21 +48,22 @@ export class Tab4AdminPage implements OnInit {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Label[] ;
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [45, 37], label: 'Ofertas por ciclos' }
+    { data: [], label: 'Ofertas por ciclos'}
   ];
+
+
   crearGrafico(ciclos){
     var ciclesName: string[] = [];
     for(let i = 0; i < this.ids.length; i++) {
       for(let j = 0; j < ciclos.length; j++) {
         if(ciclos[j].id==this.ids[i]){
-          var num = ciclos[j].name;
-          ciclesName.push(num); 
+          ciclesName.push(ciclos[j].name); 
         }    
       }
     }
@@ -72,9 +74,9 @@ export class Tab4AdminPage implements OnInit {
     ];
   }
 
-  setCicles(data){
-    this.cicles = data.data
-  }
+  // setCicles(data){
+  //   this.cicles = data.data
+  // }
 
   
 
@@ -131,13 +133,14 @@ export class Tab4AdminPage implements OnInit {
         console.log(this.offersByCicle);
         this.crearGrafico(this.cicles);
       });
-    // -->meter datos en grafica offersByCicle//ciclesSelect= -->cicles=> ids
-// https://amoelcodigo.com/graficas-angular-ng2charts/
+
+  // https://amoelcodigo.com/graficas-angular-ng2charts/
   }
 
   filtrar(toSort: any, id){
     return toSort.data.filter((element) => element.cicle_id == id)
   }
+
   filtrarIds(){
     for(let i = 0; i < this.ids.length; i++) {
       var num = this.offers.filter(offer => offer.cicle_id == this.ids[i]).length;
@@ -146,9 +149,6 @@ export class Tab4AdminPage implements OnInit {
     
   }
 
-  // filtrar(toSort: any, id){
-  //   return toSort.data.filter((element) => element.cicle_id == id)
-  // }
   filtrarDate(toSort: any){
     return toSort.data.filter((element) =>element.date_max >= "2020-08-12T00:00:00.000000Z");
   }
