@@ -47,7 +47,7 @@ export class Tab4AdminPage implements OnInit {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Label[] = ["a", "b"];
+  barChartLabels: Label[] ;
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
@@ -55,6 +55,12 @@ export class Tab4AdminPage implements OnInit {
   barChartData: ChartDataSets[] = [
     { data: [45, 37], label: 'Ofertas por ciclos' }
   ];
+  crearGrafico(){
+    this.barChartLabels = this.ids
+    this.barChartData = [
+      { data: this.offersByCicle, label: 'Ofertas por ciclos'}
+    ];
+  }
 
   crearGrafico(){
     this.barChartLabels = this.ids
@@ -116,8 +122,9 @@ export class Tab4AdminPage implements OnInit {
         this.offers = this.filtrarDate(this.articles);
         // console.log(this.offers);
         this.filtrarIds();
+        console.log(this.ids);
+        console.log(this.offersByCicle);
         this.crearGrafico();
-        console.log(this.offersByCicle)
       });
     // -->meter datos en grafica offersByCicle//ciclesSelect= -->cicles=> ids
 // https://amoelcodigo.com/graficas-angular-ng2charts/
@@ -131,7 +138,7 @@ export class Tab4AdminPage implements OnInit {
       var num = this.offers.filter(offer => offer.cicle_id == this.ids[i]).length;
       this.offersByCicle.push(num);      
     }
-    // console.log(this.offersByCicle);
+    
   }
 
   // filtrar(toSort: any, id){
@@ -139,5 +146,10 @@ export class Tab4AdminPage implements OnInit {
   // }
   filtrarDate(toSort: any){
     return toSort.data.filter((element) =>element.date_max >= "2020-08-12T00:00:00.000000Z");
+  }
+
+  resetValues(){
+    this.ids = [];
+    this.offersByCicle = [];
   }
 }

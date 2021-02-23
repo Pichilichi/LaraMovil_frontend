@@ -3,7 +3,7 @@
     <ion-title>tab4-admin</ion-title>
     <ion-item>
     <ion-label>Filtrar ofertas por ciclo</ion-label>
-    <ion-select multiple="true" (ionChange)="setTabla()" [(ngModel)]="ids" placeholder="Selecciona uno o más">
+    <ion-select multiple="true" (click)="resetValues()" (ionChange)="setTabla()" [(ngModel)]="ids" placeholder="Selecciona uno o más">
       <ion-select-option *ngFor="let cicle of cicles" [value]="cicle.id">{{cicle.name}}</ion-select-option>
     </ion-select>
   </ion-item>
@@ -11,15 +11,16 @@
 </ion-header>
 
 <ion-content>
-<div class="chart-wrapper">
-    <canvas baseChart 
-    [datasets]="barChartData"
-    [labels]="barChartLabels"
-    [options]="barChartOptions"
-    [plugins]="barChartPlugins"
-    [legend]="barChartLegend"
-    [chartType]="barChartType">
-  </canvas>
-</div>
-</div>
+  <div *ngIf="ids">
+    <div class="chart-wrapper">
+        <canvas baseChart 
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>
 </ion-content>
