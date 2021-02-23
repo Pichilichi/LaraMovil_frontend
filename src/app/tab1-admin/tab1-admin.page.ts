@@ -24,13 +24,22 @@ export class Tab1AdminPage implements OnInit {
   activate($id){
     this.data = $id;
     console.log(this.data);
-    this.authService.activate(this.authService.token,this.data).then(data => {
-      this.authService.token = data;
-      //console.log(this.authService.token);
-    })
+    this.authService.activate(this.authService.token,this.data);
     this.authService.getUsers(this.authService.token).then(data => {
       this.users = data;
     })
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.authService.getUsers(this.authService.token).then(data => {
+      this.users = data;
+    })
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   // getAllUsers(){

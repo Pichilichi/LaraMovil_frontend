@@ -72,16 +72,11 @@ export class Tab4AdminPage implements OnInit {
     ];
   }
 
-  crearGrafico(){
-    this.barChartLabels = this.ids
-    this.barChartData = [
-      { data: this.offersByCicle, label: 'Ofertas por ciclos'}
-    ];
-    }
-
   setCicles(data){
     this.cicles = data.data
   }
+
+  
 
   // setCandidates(data){
   //   this.candis = []
