@@ -4,7 +4,7 @@
     <ion-item>
     <ion-label>Filtrar ofertas por ciclo</ion-label>
     <ion-select multiple="true" (ionChange)="setTabla()" [(ngModel)]="ids" placeholder="Selecciona uno o más">
-      <ion-select-option *ngFor="let cicle of cicles.data" [value]="cicle.id">{{cicle.name}}</ion-select-option>
+      <ion-select-option *ngFor="let cicle of cicles" [value]="cicle.id">{{cicle.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   </ion-toolbar>
