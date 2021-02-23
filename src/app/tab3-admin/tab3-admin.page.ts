@@ -38,9 +38,7 @@ export class Tab3AdminPage implements OnInit {
           handler:(data: any) =>{
             this.data = $id;
             console.log('Pum, borrado del mapa',this.data);
-            this.authService.deleteOffers(this.authService.token, this.data).then(data => {
-              this.authService.token = data;
-            })
+            this.authService.deleteOffers(this.authService.token, this.data);
           }
         }
       ]
@@ -50,6 +48,18 @@ export class Tab3AdminPage implements OnInit {
     this.authService.getOffers(this.authService.token).then(data => {
       this.offers = data;
     });
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.authService.getOffers(this.authService.token).then(data => {
+      this.offers = data;
+    })
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   ngOnInit() {

@@ -178,7 +178,6 @@ export class AuthService {
    }
 
    deleteOffers(tok: any, offer_id: any){
-    this.token = tok;
     return new Promise(resolve => {
       this.http.delete(this.apiUrl + '/offers/' + offer_id,{
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
