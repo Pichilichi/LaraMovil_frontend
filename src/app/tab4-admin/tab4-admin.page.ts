@@ -55,8 +55,18 @@ export class Tab4AdminPage implements OnInit {
   barChartData: ChartDataSets[] = [
     { data: [45, 37], label: 'Ofertas por ciclos' }
   ];
-  crearGrafico(){
-    this.barChartLabels = this.ids
+  crearGrafico(ciclos){
+    var ciclesName: string[] = [];
+    for(let i = 0; i < this.ids.length; i++) {
+      for(let j = 0; j < ciclos.length; j++) {
+        if(ciclos[j].id==this.ids[i]){
+          var num = ciclos[j].name;
+          ciclesName.push(num); 
+        }    
+      }
+    }
+    
+    this.barChartLabels = ciclesName;
     this.barChartData = [
       { data: this.offersByCicle, label: 'Ofertas por ciclos'}
     ];
@@ -117,7 +127,7 @@ export class Tab4AdminPage implements OnInit {
         this.filtrarIds();
         console.log(this.ids);
         console.log(this.offersByCicle);
-        this.crearGrafico();
+        this.crearGrafico(this.cicles);
       });
 
     // -->meter datos en grafica offersByCicle//ciclesSelect= -->cicles=> ids
