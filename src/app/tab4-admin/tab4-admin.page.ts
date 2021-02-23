@@ -3,7 +3,9 @@ import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { timestamp } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-tab4-admin',
@@ -12,21 +14,30 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab4AdminPage implements OnInit {
 
-  data: any;
+  // data: any;
   articles = {};
-  cicles = [];
-  candis = [];
-  id: number;
-  ciclo:string;
-  candi: number
+  cicles : [];
+  data: any;
+  // candis = [];
+  ids: [];
+  ciclesSelect: string[]=[];
+  // ciclo:string;
+  // candi: number
+  offers = [];
+  offersByCicle: number[] = [];
+  today = new Date(Date.now());
 
   constructor(private http: HttpClient,
     private authService: AuthService,) {
-      this.authService.getOffers(this.authService.token).then(data => {
-        this.articles = data;
-        this.data = this.articles
+      // this.authService.getOffers(this.authService.token).then(data => {
+      //   this.articles = data;
+      //   this.data = this.articles
+      //   this.setCicles(this.data)
+      // });
+      this.authService.getCicles().then(data => {
+        this.data = data;
         this.setCicles(this.data)
-      });
+      })
     
   }
 
@@ -36,44 +47,119 @@ export class Tab4AdminPage implements OnInit {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Label[] = this.cicles;
+  barChartLabels: Label[] ;
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Ofertas por ciclos' }
+    { data: [45, 37], label: 'Ofertas por ciclos' }
   ];
+  crearGrafico(ciclos){
+    var ciclesName: string[] = [];
+    for(let i = 0; i < this.ids.length; i++) {
+      for(let j = 0; j < ciclos.length; j++) {
+        if(ciclos[j].id==this.ids[i]){
+          var num = ciclos[j].name;
+          ciclesName.push(num); 
+        }    
+      }
+    }
+    
+    this.barChartLabels = ciclesName;
+    this.barChartData = [
+      { data: this.offersByCicle, label: 'Ofertas por ciclos'}
+    ];
+  }
+
+  crearGrafico(){
+    this.barChartLabels = this.ids
+    this.barChartData = [
+      { data: this.offersByCicle, label: 'Ofertas por ciclos'}
+    ];
+    }
 
   setCicles(data){
-    this.cicles = []
-    data.forEach(element => {
-      this.ciclo = element.date_max
-      this.cicles.push(this.ciclo.slice(0,7))
-    });
+    this.cicles = data.data
   }
 
-  setCandidates(data){
-    this.candis = []
-    data.forEach(element => {
-      this.candi = element.num_candidates
-      this.candis.push(this.candi)
-    });
-  }
+  // setCandidates(data){
+  //   this.candis = []
+  //   data.forEach(element => {
+  //     this.candi = element.num_candidates
+  //     this.candis.push(this.candi)
+  //   });
+  // }
+
+  // setNumOffers(data){
+  //   this.offers = []
+  //   data.forEach(element => {
+  //     this.offers = element.num_candidates
+  //     this.offers.push(this.offers)
+  //   });
+  // }
+
+  
+
+  // setCicles(data){
+  //   this.cicles = []
+  //   data.forEach(element => {
+  //     this.ciclo = element.date_max
+  //     this.cicles.push(this.ciclo.slice(0,7))
+  //   });
+  // }
+
+  // setCandidates(data){
+  //   this.candis = []
+  //   data.forEach(element => {
+  //     this.candi = element.num_candidates
+  //     this.candis.push(this.candi)
+  //   });
+  // }
+
+  // setNumOffers(data){
+  //   this.offers = []
+  //   data.forEach(element => {
+  //     this.offers = element.num_candidates
+  //     this.offers.push(this.offers)
+  //   });
+  // }
 
   setTabla(){
+    
     this.authService.getOffers(this.authService.token).then(data => {
-      this.articles = data;
-      this.data = this.filtrar(this.articles, this.id);
-      this.setCicles(this.data)
-      this.barChartLabels = this.cicles;
-      this.barChartData = [
-        { data: this.candis, label: 'Ofertas por ciclos' }
-      ];
-    });
+        this.articles = data;
+        this.offers = this.filtrarDate(this.articles);
+        // console.log(this.offers);
+        this.filtrarIds();
+        console.log(this.ids);
+        console.log(this.offersByCicle);
+        this.crearGrafico(this.cicles);
+      });
+    // -->meter datos en grafica offersByCicle//ciclesSelect= -->cicles=> ids
+// https://amoelcodigo.com/graficas-angular-ng2charts/
   }
 
   filtrar(toSort: any, id){
     return toSort.data.filter((element) => element.cicle_id == id)
+  }
+  filtrarIds(){
+    for(let i = 0; i < this.ids.length; i++) {
+      var num = this.offers.filter(offer => offer.cicle_id == this.ids[i]).length;
+      this.offersByCicle.push(num);      
+    }
+    
+  }
+
+  // filtrar(toSort: any, id){
+  //   return toSort.data.filter((element) => element.cicle_id == id)
+  // }
+  filtrarDate(toSort: any){
+    return toSort.data.filter((element) =>element.date_max >= "2020-08-12T00:00:00.000000Z");
+  }
+
+  resetValues(){
+    this.ids = [];
+    this.offersByCicle = [];
   }
 }

@@ -2,32 +2,25 @@
   <ion-toolbar>
     <ion-title>tab4-admin</ion-title>
     <ion-item>
-    <ion-label>Filtrar ofertas</ion-label>
-    <ion-select (ionChange)="setTabla()" [(ngModel)]="id" placeholder="Select One">
-      <ion-select-option value="1">ASIR</ion-select-option>
-      <ion-select-option value="2">Automocion</ion-select-option>
-      <ion-select-option value="3">Comercio</ion-select-option>
-      <ion-select-option value="4">DAM</ion-select-option>
-      <ion-select-option value="5">Electricidad</ion-select-option>
-      <ion-select-option value="6">Frio</ion-select-option>
-      <ion-select-option value="7">Gestion</ion-select-option>
-      <ion-select-option value="8">Mecatronica</ion-select-option>
-      <ion-select-option value="9">Soldadura</ion-select-option>
-      <ion-select-option value="10">Teleco</ion-select-option>
+    <ion-label>Filtrar ofertas por ciclo</ion-label>
+    <ion-select multiple="true" (click)="resetValues()" (ionChange)="setTabla()" [(ngModel)]="ids" placeholder="Selecciona uno o más">
+      <ion-select-option *ngFor="let cicle of cicles" [value]="cicle.id">{{cicle.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<div class="chart-wrapper">
-    <canvas baseChart 
-    [datasets]="barChartData"
-    [labels]="barChartLabels"
-    [options]="barChartOptions"
-    [plugins]="barChartPlugins"
-    [legend]="barChartLegend"
-    [chartType]="barChartType">
-  </canvas>
-</div>
+  <div *ngIf="ids">
+    <div class="chart-wrapper">
+        <canvas baseChart 
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>
 </ion-content>
