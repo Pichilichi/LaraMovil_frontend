@@ -16,7 +16,8 @@ export class Tab4AdminPage implements OnInit {
 
   // data: any;
   articles = {};
-  cicles : any;
+  cicles : [];
+  data: any;
   // candis = [];
   ids: [];
   ciclesSelect: string[]=[];
@@ -34,7 +35,8 @@ export class Tab4AdminPage implements OnInit {
       //   this.setCicles(this.data)
       // });
       this.authService.getCicles().then(data => {
-        this.cicles = data;
+        this.data = data;
+        this.setCicles(this.data)
       })
     
   }
@@ -54,13 +56,9 @@ export class Tab4AdminPage implements OnInit {
     { data: [45, 37], label: 'Ofertas por ciclos' }
   ];
 
-  // setCicles(data){
-  //   this.cicles = []
-  //   data.forEach(element => {
-  //     this.ciclo = element.date_max
-  //     this.cicles.push(this.ciclo.slice(0,7))
-  //   });
-  // }
+  setCicles(data){
+    this.cicles = data.data
+  }
 
   // setCandidates(data){
   //   this.candis = []
@@ -118,7 +116,8 @@ export class Tab4AdminPage implements OnInit {
   }
 
   filtrar(toSort: any, id){
-    return toSort.data.filter((element) => element.cicle_id == id)}
+    return toSort.data.filter((element) => element.cicle_id == id)
+  }
   filtrarIds(){
     for(let i = 0; i < this.ids.length; i++) {
       var num = this.offers.filter(offer => offer.cicle_id == this.ids[i]).length;
