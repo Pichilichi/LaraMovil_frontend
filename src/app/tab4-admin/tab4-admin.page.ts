@@ -14,17 +14,34 @@ import { element } from 'protractor';
 })
 export class Tab4AdminPage implements OnInit {
 
-  data: any;
+  // data: any;
   articles = {};
   cicles : any;
   // candis = [];
   ids: [];
-  ciclo:string;
+  ciclesSelect: string[]=[];
+  // ciclo:string;
   // candi: number
   offers = [];
-  offersByCicle: Number[] = [];
+  offersByCicle: number[] = [];
   today = new Date(Date.now());
-  
+
+  constructor(private http: HttpClient,
+    private authService: AuthService,) {
+      // this.authService.getOffers(this.authService.token).then(data => {
+      //   this.articles = data;
+      //   this.data = this.articles
+      //   this.setCicles(this.data)
+      // });
+      this.authService.getCicles().then(data => {
+        this.cicles = data;
+      })
+    
+  }
+
+  ngOnInit() {
+  }
+
   barChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -37,22 +54,29 @@ export class Tab4AdminPage implements OnInit {
     { data: [45, 37], label: 'Ofertas por ciclos' }
   ];
 
-  constructor(private http: HttpClient,
-    private authService: AuthService,) {
-      // this.authService.getOffers(this.authService.token).then(data => {
-      //   this.articles = data;
-      //   this.data = this.articles
-      //   this.setCicles(this.data)
-      // });
-      this.authService.getCicles().then(data => {
-        this.cicles = data;
-        console.log(data)
-      })
-    
-  }
+  // setCicles(data){
+  //   this.cicles = []
+  //   data.forEach(element => {
+  //     this.ciclo = element.date_max
+  //     this.cicles.push(this.ciclo.slice(0,7))
+  //   });
+  // }
 
-  ngOnInit() {
-  }
+  // setCandidates(data){
+  //   this.candis = []
+  //   data.forEach(element => {
+  //     this.candi = element.num_candidates
+  //     this.candis.push(this.candi)
+  //   });
+  // }
+
+  // setNumOffers(data){
+  //   this.offers = []
+  //   data.forEach(element => {
+  //     this.offers = element.num_candidates
+  //     this.offers.push(this.offers)
+  //   });
+  // }
 
   
 
@@ -85,29 +109,29 @@ export class Tab4AdminPage implements OnInit {
     this.authService.getOffers(this.authService.token).then(data => {
         this.articles = data;
         this.offers = this.filtrarDate(this.articles);
-        console.log(this.offers);
+        // console.log(this.offers);
+        this.filtrarIds();
       });
-    this.filtrarIds(this.offers);
 
-  }
-
-  filtrarIds(offers){
-    // this.ids.forEach(function(id){
-    //   this.offersByCicle.push(this.filtrar(this.offers, id).length());
-    // });
-    // for(let i = 0; i < this.ids.length; i++) {
-    //   this.offersByCicle.push(this.filtrar(this.offers, this.ids[i]).length());      
-    // }
-    // console.log(this.offersByCicle);
-    this.ids.forEach((element) =>this.offersByCicle.push(this.filtrar(offers, element).length()) )
-  }
-
-  filterN(toSort: any){
-
+    // -->meter datos en grafica offersByCicle//ciclesSelect= -->cicles=> ids
+// https://amoelcodigo.com/graficas-angular-ng2charts/
   }
 
   filtrar(toSort: any, id){
     return toSort.data.filter((element) => element.cicle_id == id)
+  filtrarIds(){
+    for(let i = 0; i < this.ids.length; i++) {
+      var num = this.offers.filter(offer => offer.cicle_id == this.ids[i]).length;
+      this.offersByCicle.push(num);      
+    }
+    // console.log(this.offersByCicle);
+  }
+
+  // filtrar(toSort: any, id){
+  //   return toSort.data.filter((element) => element.cicle_id == id)
+  // }
+  filtrarDate(toSort: any){
+    return toSort.data.filter((element) =>element.date_max >= "2020-08-12T00:00:00.000000Z");
   }
   filtrarDate(toSort: any){
     return toSort.data.filter((element) =>element.date_max >= "2020-08-12T00:00:00.000000Z");
