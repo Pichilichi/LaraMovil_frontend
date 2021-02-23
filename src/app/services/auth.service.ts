@@ -66,7 +66,7 @@ export class AuthService {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),
         })
       .subscribe(data => {
-      this.token = data;
+
       resolve(data);
       }, err => {
       console.log(err);
@@ -140,7 +140,6 @@ export class AuthService {
    }
 
   getUsers(tok: any) {
-    this.token = tok;
     return new Promise(resolve => {
     this.http.get(this.apiUrl + '/users', {
     headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok.data.token),

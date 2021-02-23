@@ -10,6 +10,9 @@ import { HttpClientModule }    from '@angular/common/http';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { ChartsModule } from 'ng2-charts';
+import { File } from '@ionic-native/file/ngx'
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +28,9 @@ import { ChartsModule } from 'ng2-charts';
     provide: RouteReuseStrategy, 
     useClass: IonicRouteStrategy, },
     NativeStorage,
+    File,
+    FileOpener,
+    EmailComposer,
   ],
   bootstrap: [AppComponent],
 })

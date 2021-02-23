@@ -78,6 +78,8 @@ export class Tab4AdminPage implements OnInit {
   //   this.cicles = data.data
   // }
 
+  
+
   // setCandidates(data){
   //   this.candis = []
   //   data.forEach(element => {
